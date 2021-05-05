@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>COMP 2537 - Assignment 2</title>
+    <meta charset="utf-8">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div>
+        <p id="p1"></p>
+    </div>
+
+    <div id="content">
+        <p id="note"><i>All fields are editable and deletable.</i></p>
+        <div id="topContainer">
+        
+            <form>
+                <fieldset id="inputForm">
+                <legend class="containerTitle">Add a Member</legend>
+                <input type="text" placeholder="First Name" id="fname"/>
+                <input type="text" placeholder="Last Name" id="lname"/>
+                <input type="email" placeholder="Email" id="email"/>
+                <input type="text" placeholder="Vehicle Model" id="vehicle"/>
+                <input type="text" placeholder="Verified (Y/N)" id="verified"/>
+                <input type="button" id="submit" value="Submit"/>
+                </fieldset>
+            </form>
+
+            <div id="members">
+                <!-- Table goes here. -->
+            </div>
+
+        </div>
+    
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="./script/client.js"></script>
+</body>
+
+</html>
