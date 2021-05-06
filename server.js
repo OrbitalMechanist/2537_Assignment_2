@@ -111,24 +111,20 @@ app.post('/modify-member-db', function (req, res) {
 
     let queryExpr = ";";
 
+//yes, this IS necessary. Unfortunately.
     if (fieldToUse == "first_name") {
-        console.log("if happened");
         queryExpr = "UPDATE member SET first_name = ? WHERE ID = ?;"
     }
     if (fieldToUse == "last_name") {
-        console.log("if happened");
         queryExpr = "UPDATE member SET last_name = ? WHERE ID = ?;"
     }
     if (fieldToUse == "email") {
-        console.log("if happened");
         queryExpr = "UPDATE member SET email = ? WHERE ID = ?;"
     }
     if (fieldToUse == "vehicle") {
-        console.log("if happened");
         queryExpr = "UPDATE member SET vehicle = ? WHERE ID = ?;"
     }
     if (fieldToUse == "verified") {
-        console.log("if happened");
         queryExpr = "UPDATE member SET verified = ? WHERE ID = ?;"
     }
 
@@ -136,9 +132,9 @@ app.post('/modify-member-db', function (req, res) {
         [req.body.data, req.body.target_id],
         function (error, results, fields) {
             console.log('Rows returned are: ', results);
-            //if (error) {
-            //    throw error;
-            //}
+            if (error) {
+                throw error;
+            }
             console.log(error);
             res.send({ status: "success" });
         });
