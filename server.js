@@ -111,22 +111,7 @@ app.post('/modify-member-db', function (req, res) {
 
     let queryExpr = ";";
 
-//yes, this IS necessary. Unfortunately.
-    if (fieldToUse == "first_name") {
-        queryExpr = "UPDATE member SET first_name = ? WHERE ID = ?;"
-    }
-    if (fieldToUse == "last_name") {
-        queryExpr = "UPDATE member SET last_name = ? WHERE ID = ?;"
-    }
-    if (fieldToUse == "email") {
-        queryExpr = "UPDATE member SET email = ? WHERE ID = ?;"
-    }
-    if (fieldToUse == "vehicle") {
-        queryExpr = "UPDATE member SET vehicle = ? WHERE ID = ?;"
-    }
-    if (fieldToUse == "verified") {
-        queryExpr = "UPDATE member SET verified = ? WHERE ID = ?;"
-    }
+    queryExpr = "UPDATE member SET " + fieldToUse + " = ? WHERE ID = ?;"
 
     connection.query(queryExpr,
         [req.body.data, req.body.target_id],
