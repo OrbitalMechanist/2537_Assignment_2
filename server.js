@@ -65,8 +65,6 @@ app.get('/request-db', function (req, res) {
 app.post('/add-member-db', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
 
-    console.log("got here");
-
     let connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
@@ -89,6 +87,65 @@ app.post('/add-member-db', function (req, res) {
     connection.end();
     
 });
+
+app.post('/modify-member-db', function (req, res) {
+    res.setHeader('Content-Type', 'application/json');
+
+    let connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'assignment2'
+    });
+    connection.connect();
+
+    console.log("--------------------------------");
+    console.log(req.body);
+
+    let fieldToUse = req.body.field;
+    console.log(fieldToUse);
+
+    //let fieldToUse = fieldToUse.replace(/[']/g, "");
+
+    console.log(fieldToUse);
+
+    let queryExpr = ";";
+
+    if (fieldToUse == "first_name") {
+        console.log("if happened");
+        queryExpr = "UPDATE member SET first_name = ? WHERE ID = ?;"
+    }
+    if (fieldToUse == "last_name") {
+        console.log("if happened");
+        queryExpr = "UPDATE member SET last_name = ? WHERE ID = ?;"
+    }
+    if (fieldToUse == "email") {
+        console.log("if happened");
+        queryExpr = "UPDATE member SET email = ? WHERE ID = ?;"
+    }
+    if (fieldToUse == "vehicle") {
+        console.log("if happened");
+        queryExpr = "UPDATE member SET vehicle = ? WHERE ID = ?;"
+    }
+    if (fieldToUse == "verified") {
+        console.log("if happened");
+        queryExpr = "UPDATE member SET verified = ? WHERE ID = ?;"
+    }
+
+    connection.query(queryExpr,
+        [req.body.data, req.body.target_id],
+        function (error, results, fields) {
+            console.log('Rows returned are: ', results);
+            //if (error) {
+            //    throw error;
+            //}
+            console.log(error);
+            res.send({ status: "success" });
+        });
+    connection.end();
+
+
+})
 
 var port = 451;
 

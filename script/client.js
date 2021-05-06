@@ -7,16 +7,16 @@ function updateTable() {
 
             console.log("Data returned from MySQL", data);
 
-            let t = "<table><tr><th> First Name </th><th> Last Name </th><th> Email </th><th> Vehicle </th><th> Verified </th></tr>";
+            let t = '<table id="dataTable"><tr><th> First Name </th><th> Last Name </th><th> Email </th><th> Vehicle </th><th> Verified </th></tr>';
             for (let i = 0; i < data.msg[1].length; i++) {
                 let user = data.msg[1][i];
                 console.log(user.first_name, user.last_name, user.email, user.vehicle, user.verified);
 
-                t += "<tr><td>" + user.first_name + "</td><td>" +
-                    user.last_name + "</td><td>" +
-                    user.email + "</td><td>" +
-                    user.vehicle + "</td><td>" +
-                    user.verified + "</td></tr>";
+                t += '<tr class="tableRow" id="' + data.msg[1][i].ID + '"><td class = "first_name"><span>' + user.first_name + '</span></td><td class = "last_name"><span>' +
+                user.last_name + '</span></td><td class = "email"> <span>' +
+                user.email + '</span></td><td class = "model"><span>' +
+                user.vehicle + '</span></td><td class = "verified"><span>' +
+                user.verified + "</span></td></tr>";
             }
             t += "</table>";
             let div = $("#members");
@@ -65,3 +65,48 @@ $('#submit').click(function (e) {
         }
     })
 })
+
+$('#members').on("click", "span", function () {
+    console.log("clicked");
+    console.log($(this).attr('class'));
+
+    let initialText = $(this).text();
+    let num = $(this).parent().parent().attr('id');
+    let field = $(this).parent().attr('class');
+    let input = $("<input type='text' value='" + initialText + "'>");
+    let parent = $(this).parent();
+
+        parent.html(input);
+    $(input).keyup(function (e) {
+        let val = null;
+        let span = null;
+        if (e.which == 13) { // 13 = Enter key
+            val = $(input).val();
+            span = $("<span>" + val + "</span>");
+            parent.html(span);
+
+            let resultData = {
+                data: val,
+                field: field,
+                target_id: num
+            };
+            //console.log(dataToSend);
+            $.ajax({
+                url: "/modify-member-db",
+                dataType: "json",
+                type: "POST",
+                data: resultData,
+                success: function (data) {
+                    updateTable();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("ERROR:", jqXHR, textStatus, errorThrown);
+                }
+
+            });
+
+        }
+
+    });
+
+});

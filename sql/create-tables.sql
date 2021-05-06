@@ -17,4 +17,4 @@ INSERT INTO member VALUE(0, 'LeBron', 'Queen', 'BasketballQueen@basketball.com',
 INSERT INTO member VALUE(0, 'LeBron', 'King', 'BasketballKing@basketball.com', 'Hyundai Kona EV', 'Y');
 INSERT INTO member VALUE(0, 'Ace', 'Ventura', 'ILikeCheese@cheese.com', 'Tesla Model 3', 'Y');
 INSERT INTO member VALUE(0, 'LeBlanc', 'Jordan', 'jokes@basketball.com', 'Kia Soul EV', 'Y');
-INSERT INTO member VALUE(0, 'Maximus', 'Brown', 'partyevin@bcit.com', 'Tesla Roadster', 'N');
+INSERT INTO member VALUE(0, 'Jim', 'Brown', 'partyevin@bcit.com', 'Tesla Roadster', 'N');
