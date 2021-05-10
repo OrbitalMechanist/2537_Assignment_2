@@ -1,3 +1,4 @@
+'use strict';
 function updateTable() {
     $.ajax({
         url: "/request-db",
@@ -14,7 +15,7 @@ function updateTable() {
 
                 t += '<tr class="tableRow" id="' + data.msg[1][i].ID + '"><td class = "first_name"><span>' + user.first_name + '</span></td><td class = "last_name"><span>' +
                 user.last_name + '</span></td><td class = "email"> <span>' +
-                user.email + '</span></td><td class = "model"><span>' +
+                user.email + '</span></td><td class = "vehicle"><span>' +
                 user.vehicle + '</span></td><td class = "verified"><span>' +
                 user.verified + "</span></td></tr>";
             }
@@ -90,7 +91,6 @@ $('#members').on("click", "span", function () {
                 field: field,
                 target_id: num
             };
-            //console.log(dataToSend);
             $.ajax({
                 url: "/modify-member-db",
                 dataType: "json",

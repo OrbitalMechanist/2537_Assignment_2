@@ -10,10 +10,7 @@ const bodyParser = require('body-parser');
 app.use('/script', express.static('./script'));
 app.use('/css', express.static('./css'));
 
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
-// parse application/json
 app.use(bodyParser.json());
 
 app.get('/', function (req, res) {
@@ -21,7 +18,7 @@ app.get('/', function (req, res) {
     fs.readFile("./index.html", function (error, pgRes) {
         if (error) {
             res.writeHead(404);
-            res.write(msg404);
+            res.write("UH-OH 404");
         } else {
             res.writeHead(200, { 'Content-Type': 'text/html' });
             res.write(pgRes);
@@ -31,16 +28,13 @@ app.get('/', function (req, res) {
 });
 
 app.get('/request-db', function (req, res) {
-    // Let's build the DB if it doesn't exist
     const connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
         password: '',
         multipleStatements: true
     });
-
     let query = "USE assignment2; SELECT * FROM member";
-
     connection.connect();
     connection.query(query, function (error, results, fields) {
         if (error) {
@@ -99,15 +93,7 @@ app.post('/modify-member-db', function (req, res) {
     });
     connection.connect();
 
-    console.log("--------------------------------");
-    console.log(req.body);
-
     let fieldToUse = req.body.field;
-    console.log(fieldToUse);
-
-    //let fieldToUse = fieldToUse.replace(/[']/g, "");
-
-    console.log(fieldToUse);
 
     let queryExpr = ";";
 
